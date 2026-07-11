@@ -433,12 +433,15 @@ a { color: inherit; text-decoration: none; }
 /* touch devices: no hover — show bio content statically over dimmed media */
 @media (hover: none) {
   .tile-title { opacity: 0; }
+  .tile-head { display: none; }
   .tile-bio {
     opacity: 1;
     transform: none;
-    background: linear-gradient(rgba(14, 47, 43, 0) 0%, rgba(14, 47, 43, 0.92) 45%);
+    background: linear-gradient(rgba(14, 47, 43, 0.35) 0%, rgba(14, 47, 43, 0.75) 22%, rgba(14, 47, 43, 0.96) 48%);
   }
-  .work-tile > img, .work-tile > video { filter: saturate(0.6) brightness(0.55); }
+  .tile-bio h3 { font-size: 1.25rem; }
+  .tile-bio p { font-size: 0.88rem; }
+  .work-tile > img, .work-tile > video { filter: saturate(0.5) brightness(0.45); }
 }
 
 /* ---------- Case study cards (legacy) ---------- */
