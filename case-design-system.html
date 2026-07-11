@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Foundry Design System &amp; SDK — Hamza Sunghar</title>
+  <meta name="description" content="Case study: building the design system and SDK behind AI Foundry — foundations, AI-native components, and full light/dark theming across web and mobile.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">hamza-sunghar<span>_</span></a>
+      <div class="nav-links">
+        <a href="index.html#work">work</a>
+        <a href="index.html#about">about</a>
+        <a href="https://dochub.com/m/shared-document/hamza-sunghar/qA8ldYxVE3LyBvJR6MJrpP/cv-2025-10-pdf?dt=48s48YyhCrawFHSzD5S-" target="_blank" rel="noopener" class="hide-mobile">resume</a>
+        <a href="mailto:hsunghardesign@gmail.com" class="nav-cta">get_in_touch()</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="cs-hero">
+    <div class="wrap">
+      <p class="crumb reveal"><a href="index.html#work">← work</a> / case_02</p>
+      <h1 class="reveal">AI Foundry Design System &amp; SDK</h1>
+      <dl class="cs-meta reveal">
+        <div><dt>Role</dt><dd>Design Systems Designer</dd></div>
+        <div><dt>Company</dt><dd>Syngenta</dd></div>
+        <div><dt>Focus</dt><dd>Design System · SDK</dd></div>
+        <div><dt>Scope</dt><dd>Foundations · Components · Theming</dd></div>
+      </dl>
+      <figure class="cs-cover reveal">
+        <img src="images/ds-hero.png" alt="AI Foundry landing page built from the design system — dark theme hero">
+      </figure>
+    </div>
+  </header>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Overview</p>
+        <h2>One system behind every surface</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>As AI Foundry grew from a single hub into a family of products — web, mobile, landing pages, and an SDK for internal teams building on the platform — every screen was being designed and built from scratch. I created the <strong>AI Foundry Design System</strong>: a single source of truth covering foundations, components, and theming, packaged so both designers and engineers consume the same system.</p>
+        <p>The goal was twofold: make the product family feel like one product, and make the <strong>SDK</strong> path real — teams building their own AI experiences on the platform should inherit accessible, brand-consistent UI for free rather than reinventing chat interfaces from zero.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Foundations</p>
+        <h2>Grid, type, and iconography</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Everything sits on documented foundations: a responsive <strong>grid</strong> spanning breakpoints from mobile to widescreen, a <strong>type scale</strong> engineered for long-form AI responses as much as interface chrome, and a consistent <strong>icon set</strong> with defined sizing, stroke, and usage rules.</p>
+        <div class="gallery two">
+          <figure><img src="images/ds-grid.png" alt="Responsive grid definitions across breakpoints" loading="lazy"><figcaption>Grid — responsive columns across every breakpoint</figcaption></figure>
+          <figure><img src="images/ds-typography.png" alt="Typography scale and usage rules" loading="lazy"><figcaption>Typography — a scale built for AI conversation and chrome</figcaption></figure>
+        </div>
+        <div class="full-img">
+          <img src="images/ds-icons.png" alt="Icon set with sizing and stroke rules" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Components</p>
+        <h2>AI-native components, not retrofits</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Generic component libraries don't answer AI-product questions: how does a streamed response render a table? Where do feedback controls live? What does a source citation look like? I designed the component layer around these <strong>AI-native patterns</strong> — the chat surface, rich response content (headings, lists, copyable tables), message-level actions, and the mobile navigation drawer.</p>
+        <div class="full-img">
+          <img src="images/ds-chat-ui.png" alt="Chat UI components" loading="lazy">
+        </div>
+        <div class="full-img">
+          <img src="images/ds-frame-1150.png" alt="Rich response patterns — tables with copy action, lists, message actions" loading="lazy">
+        </div>
+        <p>Every response element is specified down to its micro-interactions — hover-revealed <em>copy table</em> actions, feedback and read-aloud controls, and follow-up prompts — so engineers implement behaviour, not guesswork.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Theming</p>
+        <h2>Light and dark from one token set</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>The system is fully tokenised: colour, elevation, and type resolve through semantic tokens, so <strong>light and dark themes</strong> come from one definition — proven end-to-end on the AI Foundry landing page, designed and built in both modes without a single hard-coded value.</p>
+        <div class="full-img">
+          <img src="images/ds-landing-dark-top.png" alt="AI Foundry landing page — dark theme" loading="lazy">
+        </div>
+        <div class="full-img">
+          <img src="images/ds-landing-light.png" alt="AI Foundry landing page — light theme" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Impact</p>
+        <h2>A system that ships</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>The design system now underpins AI Foundry's web hub, mobile experience, and marketing surfaces, and forms the UI layer of the platform SDK. New screens start from documented parts instead of blank canvases — design and engineering share one vocabulary, reviews focus on the problem rather than the pixels, and the product family reads as one product.</p>
+        <div class="stats">
+          <div class="stat"><b>1</b><span>source of truth across web, mobile, and SDK surfaces</span></div>
+          <div class="stat"><b>2</b><span>full themes — light and dark — from a single token set</span></div>
+          <div class="stat"><b>100%</b><span>of AI Foundry screens composed from system components</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-project">
+    <p class="label">next_case_study</p>
+    <a href="case-knowledge-hub.html"><h2>AI Knowledge Hub — Create Your Own Assistant →</h2></a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 hamza_sunghar // based_in: united_kingdom</span>
+      <div class="footer-links">
+        <a href="https://www.behance.net/HSMDesigner" target="_blank" rel="noopener">behance</a>
+        <a href="https://www.linkedin.com/in/hamza-sunghar/" target="_blank" rel="noopener">linkedin</a>
+        <a href="mailto:hsunghardesign@gmail.com">email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
