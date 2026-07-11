@@ -262,16 +262,19 @@
     if (slider) {
       let down = false, startX = 0, startScroll = 0, moved = 0;
       slider.addEventListener('pointerdown', (e) => {
+        moved = 0;
         if (e.pointerType !== 'mouse') return;
-        down = true; moved = 0;
+        down = true;
         startX = e.clientX; startScroll = slider.scrollLeft;
-        slider.classList.add('dragging');
       });
       window.addEventListener('pointermove', (e) => {
         if (!down) return;
         const dx = e.clientX - startX;
         moved = Math.max(moved, Math.abs(dx));
-        slider.scrollLeft = startScroll - dx;
+        if (moved > 6) {
+          slider.classList.add('dragging');
+          slider.scrollLeft = startScroll - dx;
+        }
       });
       window.addEventListener('pointerup', () => {
         down = false;

@@ -35,7 +35,7 @@
         <div><dt>Methods</dt><dd>15 moderated sessions · Synthesis</dd></div>
       </dl>
       <figure class="cs-cover reveal">
-        <img src="images/ai-foundry-login.png" alt="AI Foundry Chat — SSO login screen with generative corn artwork">
+        <img src="images/ai-foundry-home.png" alt="AI Foundry Chat — hub homepage with skills and recommendations">
       </figure>
     </div>
   </header>
@@ -104,7 +104,7 @@
         <p>Every major interface decision traced back to tester evidence. The homepage was rebuilt around a <strong>"Recommended for you"</strong> strip — the home of the role-aware recommendation engine — with redundant chrome stripped out to keep density low for newcomers while preserving depth for power users.</p>
         <p>The wider system design included an agent header with plain-language descriptions, a side-nav library for skills and prompts, integrated knowledge bases, confidence and accuracy indicators on responses, a community hub for shared practices, and <strong>Apple-style visual onboarding</strong> to carry newcomers to their first successful outcome.</p>
         <div class="full-img">
-          <img src="images/ai-foundry-home.png" alt="AI Foundry Chat — homepage with skills and recommendations" loading="lazy">
+          <img src="images/ai-foundry-login.png" alt="AI Foundry Chat — SSO login screen with generative corn artwork" loading="lazy">
         </div>
         <p>Trust and governance were designed in from the start: an opt-in <strong>connectors</strong> model with per-app authorisation and plain-language data protection, and skills like <strong>Translation</strong> that expose their assistant behaviour — literal, localised, or creative — as an explicit user choice.</p>
         <div class="gallery two">
@@ -155,8 +155,12 @@
   <script>
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.classList && c.classList.contains('reveal')) : [el];
+      el.style.setProperty('--stagger', (sibs.indexOf(el) % 4) * 0.12 + 's');
+      io.observe(el);
+    });
   </script>
 </body>
 </html>

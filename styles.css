@@ -338,7 +338,6 @@ a { color: inherit; text-decoration: none; }
 }
 .work-slider::-webkit-scrollbar { display: none; }
 .work-slider.dragging { cursor: grabbing; scroll-snap-type: none; }
-.work-slider.dragging .work-tile { pointer-events: none; }
 .work-track {
   display: flex;
   gap: 26px;
