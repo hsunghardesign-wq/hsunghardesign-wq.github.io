@@ -44,9 +44,10 @@ a { color: inherit; text-decoration: none; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
 
 /* ---------- Mono utility voice ---------- */
-.mono, .label, .tag, .crumb, .case-num, .hero-kicker, .footer, .cs-meta dt, .strip-track {
+.mono, .label, .crumb, .case-num, .hero-kicker, .footer, .cs-meta dt, .strip-track {
   font-family: var(--font-mono);
 }
+.tag { font-family: var(--font-display); }
 
 /* ---------- Nav (status bar) ---------- */
 .nav {
@@ -180,7 +181,7 @@ a { color: inherit; text-decoration: none; }
   gap: 8px;
   padding: 13px 26px;
   border-radius: 999px;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.85rem;
   transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -524,7 +525,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .case-link {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.85rem;
   color: var(--ink);
