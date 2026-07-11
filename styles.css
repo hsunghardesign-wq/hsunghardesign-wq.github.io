@@ -101,7 +101,8 @@ a { color: inherit; text-decoration: none; }
 .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 0 24px rgba(31, 134, 99, 0.35); }
 
 /* ---------- Hero ---------- */
-.hero { padding: 170px 0 70px; }
+.hero { padding: 170px 0 90px; min-height: 88vh; display: flex; align-items: center; }
+.hero > .wrap { width: 100%; }
 
 .hero-grid {
   display: grid;
@@ -145,8 +146,8 @@ a { color: inherit; text-decoration: none; }
 
 .hero h1 {
   font-weight: 600;
-  font-size: clamp(2.7rem, 6vw, 4.4rem);
-  line-height: 1.04;
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  line-height: 0.98;
   letter-spacing: -0.03em;
   margin-bottom: 26px;
   text-transform: uppercase;
@@ -179,7 +180,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 26px;
+  padding: 16px 34px;
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 600;
@@ -250,7 +251,7 @@ a { color: inherit; text-decoration: none; }
 .dash b {
   display: block;
   font-family: var(--font-mono);
-  font-size: 1.7rem;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 600;
   color: var(--accent);
   letter-spacing: -0.02em;
@@ -311,7 +312,7 @@ a { color: inherit; text-decoration: none; }
 
 .section-head h2 {
   font-weight: 600;
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
   letter-spacing: -0.02em;
   line-height: 1.1;
   text-transform: uppercase;
@@ -324,7 +325,44 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono);
 }
 
-/* ---------- Bento work grid (hover reveals bio) ---------- */
+/* ---------- Horizontal drag gallery ---------- */
+.work-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 0 calc(50% - 50vw);
+  padding: 0 max(32px, calc(50vw - var(--maxw) / 2 + 32px));
+  scroll-snap-type: x proximity;
+}
+.work-slider::-webkit-scrollbar { display: none; }
+.work-slider.dragging { cursor: grabbing; scroll-snap-type: none; }
+.work-slider.dragging .work-tile { pointer-events: none; }
+.work-track {
+  display: flex;
+  gap: 26px;
+  width: max-content;
+}
+.work-track .work-tile {
+  flex: 0 0 clamp(320px, 55vw, 820px);
+  min-height: clamp(360px, 58vh, 620px);
+  scroll-snap-align: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: center center;
+  will-change: transform;
+}
+.work-track .work-tile img, .work-track .work-tile video { pointer-events: none; }
+.drag-hint {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -338,10 +376,10 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
-  min-height: 420px;
+  min-height: 520px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
-.work-tile.wide { grid-column: span 2; min-height: 480px; }
+.work-tile.wide { grid-column: span 2; min-height: 72vh; }
 .work-tile:hover, .work-tile:focus-visible {
   border-color: rgba(31, 134, 99, 0.5);
   box-shadow: 0 24px 60px rgba(18, 53, 47, 0.16), 0 0 0 1px rgba(31, 134, 99, 0.15);
@@ -354,10 +392,10 @@ a { color: inherit; text-decoration: none; }
   width: 100%; height: 100%;
   object-fit: cover;
   filter: saturate(0.85);
-  transition: transform 0.7s ease, filter 0.5s ease, opacity 0.4s ease;
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, opacity 0.4s ease;
 }
 .work-tile:hover > img, .work-tile:hover > video {
-  transform: scale(1.05);
+  transform: scale(1.07);
   filter: saturate(0.4) brightness(0.35);
 }
 
@@ -374,8 +412,8 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #f2f7f3;
-  background: linear-gradient(rgba(14, 47, 43, 0.85), rgba(14, 47, 43, 0));
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(14, 47, 43, 0.6);
 }
 .tile-head span:first-child { color: var(--accent); }
 .tile-icon { color: var(--ink-soft); transition: color 0.3s, transform 0.3s; }
@@ -386,16 +424,19 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 0; right: 0; bottom: 0;
   z-index: 2;
-  padding: 46px 24px 20px;
-  background: linear-gradient(rgba(14, 47, 43, 0), rgba(14, 47, 43, 0.9));
+  padding: 16px 24px;
+  background: #12352f;
   transition: opacity 0.35s ease;
 }
 .tile-title h3 {
   font-weight: 600;
-  font-size: 1.35rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .work-tile:hover .tile-title { opacity: 0; }
 
@@ -419,7 +460,7 @@ a { color: inherit; text-decoration: none; }
 }
 .tile-bio h3 {
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   letter-spacing: -0.01em;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -661,7 +702,7 @@ a { color: inherit; text-decoration: none; }
 
 .contact h2 {
   font-weight: 600;
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: clamp(3.2rem, 10vw, 7.5rem);
   letter-spacing: -0.02em;
   line-height: 1.05;
   margin-bottom: 28px;
@@ -705,7 +746,7 @@ a { color: inherit; text-decoration: none; }
 
 .cs-hero h1 {
   font-weight: 600;
-  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
   letter-spacing: -0.02em;
   line-height: 1.08;
   max-width: 22ch;
@@ -855,8 +896,9 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Reveal animation ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(48px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--stagger, 0s);
 }
 .reveal.visible { opacity: 1; transform: none; }
 
@@ -873,6 +915,7 @@ a { color: inherit; text-decoration: none; }
   .case-body { padding: 32px 26px; }
   .work-grid { grid-template-columns: 1fr; }
   .work-tile, .work-tile.wide { grid-column: span 1; min-height: 380px; }
+  .work-track .work-tile { flex: 0 0 84vw; min-height: 52vh; }
   .tile-bio { padding: 22px 20px 20px; }
   .tile-bio h3 { font-size: 1.2rem; }
   .cs-section .inner { grid-template-columns: 1fr; gap: 26px; }
