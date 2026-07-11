@@ -71,13 +71,13 @@
           <p class="label">selected_work</p>
           <h2>Case Studies</h2>
         </div>
-        <p>// six projects across Syngenta and Dyson — grounded in research, measured by results</p>
+        <p>// six projects across Syngenta and Dyson in research, testing, prototyping and design</p>
       </div>
 
-      <div class="work-grid">
+      <div class="work-slider" id="workSlider"><div class="work-track">
 
         <!-- 01 AI Foundry Chat — wide -->
-        <a class="work-tile wide reveal" href="case-ai-foundry.html" aria-label="AI Foundry Chat case study">
+        <a class="work-tile reveal" href="case-ai-foundry.html" aria-label="AI Foundry Chat case study">
           <div class="tile-head"><span>> case_01 — syngenta // featured</span><span class="tile-icon">↗</span></div>
           <img src="images/ai-foundry-cover.png" alt="AI Foundry Chat — generative corn artwork" loading="lazy">
           <div class="tile-title"><h3>AI Foundry Chat — Enterprise AI Hub</h3></div>
@@ -91,7 +91,7 @@
         </a>
 
         <!-- 02 Design System & SDK — wide, featured -->
-        <a class="work-tile wide reveal" href="case-design-system.html" aria-label="AI Foundry Design System and SDK case study">
+        <a class="work-tile reveal" href="case-design-system.html" aria-label="AI Foundry Design System and SDK case study">
           <div class="tile-head"><span>> case_02 — syngenta // featured</span><span class="tile-icon">↗</span></div>
           <img src="images/ds-cover.png" alt="AI Foundry design system — landing page dark theme" loading="lazy">
           <div class="tile-title"><h3>AI Foundry Design System &amp; SDK</h3></div>
@@ -105,7 +105,7 @@
         </a>
 
         <!-- 03 AI Knowledge Hub — wide, featured -->
-        <a class="work-tile wide reveal" href="case-knowledge-hub.html" aria-label="AI Knowledge Hub case study">
+        <a class="work-tile reveal" href="case-knowledge-hub.html" aria-label="AI Knowledge Hub case study">
           <div class="tile-head"><span>> case_03 — syngenta // featured</span><span class="tile-icon">↗</span></div>
           <img src="images/kb-cover.png" alt="AI Knowledge Hub — login artwork" loading="lazy">
           <div class="tile-title"><h3>AI Knowledge Hub — Create Your Own Assistant</h3></div>
@@ -147,7 +147,7 @@
         </a>
 
         <!-- 06 Diagnostic tool -->
-        <a class="work-tile wide reveal" href="case-diagnostic-tool.html" aria-label="Diagnostic Tool case study">
+        <a class="work-tile reveal" href="case-diagnostic-tool.html" aria-label="Diagnostic Tool case study">
           <div class="tile-head"><span>> case_06 — dyson</span><span class="tile-icon">↗</span></div>
           <video autoplay muted loop playsinline poster="https://framerusercontent.com/images/t9N0v7Lbw6UswgDYuckDjJepSRc.png?width=1903&height=805" src="https://gateway-eu.assetsadobe.com/DMGateway/public-ssl/dyson/_renditions_/090/09006104-63f4-4b36-afe3-de7c270531fb/avs/Web-897-Hero-Banner-Animated-1440x0-2000k.mp4"></video>
           <div class="tile-title"><h3>Diagnostic Tool — Purifier</h3></div>
@@ -160,7 +160,8 @@
           </div>
         </a>
 
-      </div>
+      </div></div>
+      <p class="drag-hint mono">[ drag → ]</p>
     </div>
   </main>
 
@@ -250,8 +251,63 @@
   <script>
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.classList && c.classList.contains('reveal')) : [el];
+      el.style.setProperty('--stagger', (sibs.indexOf(el) % 4) * 0.12 + 's');
+      io.observe(el);
+    });
+
+    const slider = document.getElementById('workSlider');
+    if (slider) {
+      let down = false, startX = 0, startScroll = 0, moved = 0;
+      slider.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        down = true; moved = 0;
+        startX = e.clientX; startScroll = slider.scrollLeft;
+        slider.classList.add('dragging');
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        moved = Math.max(moved, Math.abs(dx));
+        slider.scrollLeft = startScroll - dx;
+      });
+      window.addEventListener('pointerup', () => {
+        down = false;
+        slider.classList.remove('dragging');
+      });
+      slider.addEventListener('click', (e) => {
+        if (moved > 8) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      const tiles = [...slider.querySelectorAll('.work-tile')];
+      const updateScale = () => {
+        const mid = window.innerWidth / 2;
+        tiles.forEach(tile => {
+          if (!tile.classList.contains('visible')) return;
+          const r = tile.getBoundingClientRect();
+          const d = Math.abs(r.left + r.width / 2 - mid);
+          const scale = 1 - Math.min(d / (window.innerWidth * 0.9), 1) * 0.12;
+          tile.style.transform = 'scale(' + scale.toFixed(4) + ')';
+        });
+      };
+      let raf = null;
+      const queue = () => { if (!raf) raf = requestAnimationFrame(() => { raf = null; updateScale(); }); };
+      slider.addEventListener('scroll', queue, { passive: true });
+      window.addEventListener('resize', queue);
+      setInterval(queue, 400);
+      queue();
+
+      slider.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          const max = slider.scrollWidth - slider.clientWidth;
+          if ((e.deltaY > 0 && slider.scrollLeft < max) || (e.deltaY < 0 && slider.scrollLeft > 0)) {
+            slider.scrollLeft += e.deltaY;
+            e.preventDefault();
+          }
+        }
+      }, { passive: false });
+    }
   </script>
 </body>
 </html>
