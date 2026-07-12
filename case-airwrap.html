@@ -29,7 +29,7 @@
       <p class="crumb reveal"><a href="index.html#work">← work</a> / case_05</p>
       <h1 class="reveal">Customisation for the Dyson Airwrap™</h1>
       <dl class="cs-meta reveal">
-        <div><dt>Role</dt><dd>Design Lead</dd></div>
+        <div><dt>Role</dt><dd>UX &amp; UI Designer</dd></div>
         <div><dt>Company</dt><dd>Dyson</dd></div>
         <div><dt>Focus</dt><dd>Customisation · E-commerce</dd></div>
         <div><dt>Methods</dt><dd>A/B testing · Card sorting</dd></div>
@@ -138,7 +138,7 @@
 
   <script>
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el, i) => {
       const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.classList && c.classList.contains('reveal')) : [el];

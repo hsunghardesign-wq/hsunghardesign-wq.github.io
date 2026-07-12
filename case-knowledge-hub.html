@@ -29,7 +29,7 @@
       <p class="crumb reveal"><a href="index.html#work">← work</a> / case_03</p>
       <h1 class="reveal">AI Knowledge Hub — Create Your Own Assistant</h1>
       <dl class="cs-meta reveal">
-        <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
+        <div><dt>Role</dt><dd>UX &amp; UI Designer</dd></div>
         <div><dt>Company</dt><dd>Syngenta</dd></div>
         <div><dt>Focus</dt><dd>AI UX · Knowledge Management</dd></div>
         <div><dt>Scope</dt><dd>Creation flow · Quality · Sharing</dd></div>
@@ -134,7 +134,7 @@
 
   <script>
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el, i) => {
       const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.classList && c.classList.contains('reveal')) : [el];
