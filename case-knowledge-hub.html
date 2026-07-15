@@ -203,6 +203,79 @@
   <section class="cs-section">
     <div class="wrap inner">
       <div class="side reveal">
+        <p class="label">AI Readiness</p>
+        <h2>What makes a document ready for AI</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>The quality score is built on a deeper piece of research: understanding <strong>why documents fail when they meet an AI</strong>. A document written for humans assumes a reader who sees the whole file, follows the links, and knows the context. Retrieval-augmented AI breaks every one of those assumptions — it retrieves <em>chunks</em>, in isolation, with no author on hand to explain.</p>
+        <ul>
+          <li><strong>Chunked retrieval changes the rules.</strong> Only a fragment of a document may be retrieved for any given question — so every section has to stand alone. Phrases like "as defined in section X" or "see linked policy" leave the AI holding a reference it cannot follow.</li>
+          <li><strong>Metadata lives in two places.</strong> Some readiness signals belong in the document itself (owner, dates, version); others — tags, audience, region, language — are maintained in the content register. The criteria distinguish what to look for in each, so documents aren't penalised for register-managed fields.</li>
+          <li><strong>Readiness is measurable.</strong> Turning these failure modes into scored criteria is what lets the platform tell an owner <em>exactly</em> which asset is dragging the assistant down, and why.</li>
+        </ul>
+        <p>Every document is evaluated against the <strong>five official KQS dimensions</strong>:</p>
+        <div class="kqs">
+          <div class="kqs-card">
+            <p class="kqs-num">kqs_01</p>
+            <h3>Retrievable</h3>
+            <ul>
+              <li>Clear, search-optimised title</li>
+              <li>Useful, consistent tags and metadata where visible</li>
+              <li>No duplicates or near-duplicate content</li>
+              <li>Easy to locate via search in its repository</li>
+              <li>Register-managed fields (tags, audience, region, language) assessed in the content register, not the document</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">kqs_02</p>
+            <h3>Clear</h3>
+            <ul>
+              <li>Plain, unambiguous language</li>
+              <li>Logical headings and short, readable paragraphs — no walls of text</li>
+              <li>Easy for both humans and LLMs to parse</li>
+              <li>Images described via alt-text or captions (noted, not penalised, when absent)</li>
+              <li>Self-contained language — understandable without following a cross-reference or link</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">kqs_03</p>
+            <h3>Relevant</h3>
+            <ul>
+              <li>Directly addresses the business need and real user questions</li>
+              <li>Actionable and problem-solving — the "how to" or "why" is explicit</li>
+              <li>Includes steps, guidance or decisions, not just abstract description</li>
+              <li>Links to related material — but critical information is never hidden entirely behind a link</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">kqs_04</p>
+            <h3>Accurate</h3>
+            <ul>
+              <li>Factually correct and precise content</li>
+              <li>Ownership, approval or source visible — or inferable</li>
+              <li>No contradictions or outdated information</li>
+              <li>Version control and explicit dates where relevant</li>
+            </ul>
+          </div>
+          <div class="kqs-card kqs-card--wide">
+            <p class="kqs-num">kqs_05</p>
+            <h3>Time-bound</h3>
+            <ul>
+              <li>Owner, last-updated date and version embedded in the document itself</li>
+              <li>Indications of review cadence and a feedback channel</li>
+              <li>Clearly positioned as current, draft, or deprecated</li>
+              <li>Suitable for continuous improvement over time</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout"><b>Why it matters:</b> an assistant can only be as trustworthy as its worst frequently-retrieved chunk. Scoring documents on these five dimensions before they reach the AI turns "garbage in, garbage out" into a governed, improvable pipeline — and gives every knowledge owner a concrete to-do list instead of a vague quality warning.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
         <p class="label">Collaboration</p>
         <h2>Shared, invited, notified</h2>
       </div>
