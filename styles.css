@@ -507,6 +507,36 @@ a { color: inherit; text-decoration: none; }
 }
 .next-project a:hover h2 { color: var(--accent); }
 
+/* ---------- Icon thumbnail tiles ---------- */
+.p-tile {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 10;   /* identical face on every project */
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project:hover .p-tile { transform: translateY(-8px); }
+.p-tile svg {
+  width: clamp(58px, 7vw, 88px);
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+
+/* per-project brand gradients */
+.p-tile--chat       { background: linear-gradient(135deg, #2c1465, #6d28d9 55%, #a78bfa); }
+.p-tile--system     { background: linear-gradient(135deg, #0c4435, #1f8663 55%, #8fd6b5); }
+.p-tile--knowledge  { background: linear-gradient(135deg, #083344, #0e7490 55%, #67e8f9); }
+.p-tile--supersonic { background: linear-gradient(135deg, #6d0f38, #e11d74 55%, #ff7ab0); }
+.p-tile--airwrap    { background: linear-gradient(135deg, #7c2d12, #ea7a2d 55%, #fbbf77); }
+.p-tile--diagnostic { background: linear-gradient(135deg, #0b3a5e, #1d74b8 55%, #7fd0ff); }
+
 /* ---------- Personas ---------- */
 .personas {
   display: grid;
