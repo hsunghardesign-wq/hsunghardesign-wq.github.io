@@ -196,8 +196,16 @@ a { color: inherit; text-decoration: none; }
 }
 
 .sec-sub { color: var(--ink-soft); max-width: 56ch; }
-.sec-sub--wide { max-width: none; white-space: nowrap; }
-@media (max-width: 900px) { .sec-sub--wide { white-space: normal; } }
+/* the Projects intro line always runs on one line on desktop —
+   targeted via #work too, so it applies independent of page caching */
+.sec-sub--wide,
+#work .sec-sub {
+  max-width: none;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .sec-sub--wide, #work .sec-sub { white-space: normal; max-width: 56ch; }
+}
 .center { text-align: center; }
 .center .sec-sub { margin: 0 auto; }
 
