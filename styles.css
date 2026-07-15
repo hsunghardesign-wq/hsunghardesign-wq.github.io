@@ -512,7 +512,8 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   z-index: 1;
   width: 100%;
-  aspect-ratio: 16 / 10;   /* identical face on every project */
+  aspect-ratio: 2.4 / 1;   /* identical, deliberately short face on every project */
+  max-height: 220px;
   border-radius: var(--radius);
   border: 1px solid var(--line);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
@@ -522,12 +523,26 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project:hover .p-tile { transform: translateY(-8px); }
-.p-tile svg {
-  width: clamp(58px, 7vw, 88px);
-  height: auto;
-  opacity: 0.95;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+
+/* small white app-icon box, coloured glyph inside */
+.p-tile .icon-box {
+  width: clamp(58px, 5.5vw, 76px);
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
+.p-tile .icon-box svg { width: 52%; height: auto; }
+
+.p-tile--chat       .icon-box { color: #6d28d9; }
+.p-tile--system     .icon-box { color: #1f8663; }
+.p-tile--knowledge  .icon-box { color: #0e7490; }
+.p-tile--supersonic .icon-box { color: #e11d74; }
+.p-tile--airwrap    .icon-box { color: #ea7a2d; }
+.p-tile--diagnostic .icon-box { color: #1d74b8; }
 
 /* per-project brand gradients */
 .p-tile--chat       { background: linear-gradient(135deg, #2c1465, #6d28d9 55%, #a78bfa); }
