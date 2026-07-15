@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise AI Knowledge Platform — UX/UI · Hamza Sunghar</title>
+  <meta name="description" content="Case study: designing the UX/UI for an enterprise AI knowledge platform — research, personas, A/B testing and system-state design.">
+  <meta name="theme-color" content="#F6F4EF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="nav" id="top">
+    <a class="nav__logo" href="index.html">HAMZA SUNGHAR<span>.</span><small>DESIGNER PORTFOLIO</small></a>
+    <nav class="nav__links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="work-ai-platform.html" class="is-active">AI Platform</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ CASE HERO ============ -->
+  <section class="case-hero">
+    <span class="case-hero__brand case-hero__brand--wesleyan">Enterprise AI</span>
+    <h1>Designing an enterprise AI knowledge platform.</h1>
+    <p class="case-hero__intro">
+      UX/UI for an internal AI-powered knowledge hub — from the SSO entry experience to the
+      system states nobody usually designs for. The journey below shows how research,
+      personas and A/B thinking shaped every decision, including turning a maintenance
+      screen into a release-marketing moment.
+    </p>
+    <div class="case-hero__facts">
+      <div><h4>Role</h4><p>Product &amp; UX/UI Designer</p></div>
+      <div><h4>Sector</h4><p>Enterprise AI / Knowledge Management</p></div>
+      <div><h4>Focus</h4><p>Portal UX, System States, Design Tokens</p></div>
+      <div><h4>Tools</h4><p>Figma, Design Tokens, HTML/CSS</p></div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section class="case-section" id="research">
+    <span class="section-label">Research</span>
+    <h2>Understanding how people meet an AI platform — and what happens when it's down.</h2>
+    <p class="lede">
+      Before designing, I mapped how users encounter the platform: the entry flow, the
+      moments of friction, and the overlooked states — downtime, upgrades, first visits —
+      where trust is won or lost.
+    </p>
+    <div class="research-grid">
+      <article>
+        <h3>Entry-flow audit</h3>
+        <p>Reviewed the SSO login journey end to end. Single-button SSO entry with "remember me" reduced friction, but the surrounding page communicated nothing about the product's value.</p>
+      </article>
+      <article>
+        <h3>System-state inventory</h3>
+        <p>Catalogued every state a user could hit — loading, empty, error, scheduled maintenance. The 6–8 hour upgrade window was the highest-visibility state with the lowest design investment.</p>
+      </article>
+      <article>
+        <h3>Stakeholder feedback loops</h3>
+        <p>Design feedback highlighted an opportunity: rather than apologising for downtime, use the screen to build anticipation for the release — a marketing moment, not an outage notice.</p>
+      </article>
+      <article>
+        <h3>Token &amp; system alignment</h3>
+        <p>Grounded every screen in the platform's design tokens — brand violet, spacing and type scales — so new states shipped consistent with the product, not bolted on.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PERSONAS ============ -->
+  <section class="case-section case-section--alt" id="personas">
+    <span class="section-label">Personas</span>
+    <h2>Who we designed for.</h2>
+    <p class="lede">Two personas anchored the decisions — the everyday knowledge worker, and the stakeholder who answers for the platform.</p>
+    <div class="personas">
+      <div class="persona">
+        <div class="persona__head">
+          <div class="persona__avatar">A</div>
+          <div><h3>Amira, 34 — The Knowledge Worker</h3><p>Uses the hub daily · Time-poor · Trusts what's consistent</p></div>
+        </div>
+        <dl>
+          <dt>Goals</dt>
+          <dd>Sign in fast with SSO, find answers quickly, and know exactly when the platform will be back if it's ever unavailable.</dd>
+          <dt>Frustrations</dt>
+          <dd>Vague outage messages with no timeline; interfaces that change without explanation after upgrades.</dd>
+          <dt>Design response</dt>
+          <dd>A clear maintenance screen with the expected window stated up front, "what's changing" explained, and a progress indicator — so downtime informs instead of frustrates.</dd>
+        </dl>
+      </div>
+      <div class="persona">
+        <div class="persona__head">
+          <div class="persona__avatar">R</div>
+          <div><h3>Raj, 45 — The Platform Stakeholder</h3><p>Owns adoption metrics · Communicates releases · Answers to leadership</p></div>
+        </div>
+        <dl>
+          <dt>Goals</dt>
+          <dd>Turn each release into visible momentum; keep users positive about the platform even during downtime.</dd>
+          <dt>Frustrations</dt>
+          <dd>Apologetic outage notices that dent confidence; missed chances to market what the team shipped.</dd>
+          <dt>Design response</dt>
+          <dd>The downtime screen doubles as release marketing — "We're upgrading your knowledge experience" with feature teasers, making the outage itself an announcement.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY / SCENARIOS ============ -->
+  <section class="case-section" id="scenarios">
+    <span class="section-label">The Journey</span>
+    <h2>Scenarios that shaped the design.</h2>
+
+    <div class="scenario">
+      <h3>Scenario 01 — &ldquo;Locked out, but informed&rdquo;</h3>
+      <p>Amira opens the hub during the upgrade window. Instead of an error, she sees a branded page: what's being upgraded, why it matters, how long it will take, and a progress bar. She closes the tab knowing exactly when to come back.</p>
+      <div class="flow">
+        <span>Visit during downtime</span><em>→</em><span>Branded maintenance page</span><em>→</em><span>"What's changing?"</span><em>→</em><span>Time expectation set</span><em>→</em><span>Returns confident</span>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>Scenario 02 — &ldquo;The release as a moment&rdquo;</h3>
+      <p>Raj shares the maintenance screen in the release comms. Because it teases what's coming rather than apologising, the upgrade lands as news — and post-release traffic spikes as users return to see what changed.</p>
+      <div class="flow">
+        <span>Release scheduled</span><em>→</em><span>Teaser screen live</span><em>→</em><span>Comms reuse the design</span><em>→</em><span>Anticipation built</span><em>→</em><span>Users return on day one</span>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>Scenario 03 — &ldquo;First sign-in&rdquo;</h3>
+      <p>A new team member hits the portal, sees the product identity clearly, and signs in with one SSO tap — no forms, no friction, "remember me" on by default for their next visit.</p>
+      <div class="flow">
+        <span>Land on portal</span><em>→</em><span>Clear product identity</span><em>→</em><span>One-tap SSO</span><em>→</em><span>Remembered next visit</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ A/B TESTING ============ -->
+  <section class="case-section case-section--alt" id="ab-testing">
+    <span class="section-label">A/B Testing &amp; Iteration</span>
+    <h2>Decisions tested, not guessed.</h2>
+    <p class="lede">
+      Key design directions were framed as experiments — compared, reviewed with
+      stakeholders, and iterated before shipping.
+    </p>
+    <table class="ab-table">
+      <thead>
+        <tr><th>Experiment</th><th>Hypothesis</th><th>Variant A</th><th>Variant B</th><th>Outcome</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Downtime treatment</td>
+          <td>A full-page takeover communicates better than a small modal</td>
+          <td>Modal over the login screen</td>
+          <td>Full-page branded maintenance experience</td>
+          <td class="win">B chosen — modal felt like an afterthought</td>
+        </tr>
+        <tr>
+          <td>Downtime tone</td>
+          <td>Informational clarity beats mystery for enterprise users</td>
+          <td>Dark countdown teaser ("something is coming")</td>
+          <td>Light informational layout with "What's changing?"</td>
+          <td class="win">B chosen after stakeholder review</td>
+        </tr>
+        <tr>
+          <td>Time expectation</td>
+          <td>Stating the window up front reduces support queries</td>
+          <td>"We'll be back soon"</td>
+          <td>Explicit "approximately 6–8 hours" in bold</td>
+          <td class="win">B shipped — clarity over vagueness</td>
+        </tr>
+        <tr>
+          <td>Progress feedback</td>
+          <td>A visible progress bar reduces perceived wait</td>
+          <td>Static text only</td>
+          <td>Progress bar + stat cards (window / new / more)</td>
+          <td class="win">B shipped — the page feels alive</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-note">Outcomes reflect design review decisions; quantitative results to be added post-release.</p>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section class="case-section" id="delivered">
+    <span class="section-label">Outcome</span>
+    <h2>Every state now speaks the brand's language.</h2>
+
+    <div class="workstream">
+      <h3>The maintenance experience</h3>
+      <p>A full-page, on-brand upgrade screen — scheduled-maintenance badge, "We're upgrading your knowledge experience" headline, explicit 6–8 hour window, "What's changing?" card with progress, and stat cards — designed in Figma on the platform's tokens and prototyped in working HTML/CSS.</p>
+      <div class="media-slot media-slot--wesleyan">images/ai-maintenance.jpg</div>
+    </div>
+
+    <div class="workstream">
+      <h3>Design-to-code delivery</h3>
+      <p>The screen exists as both the Figma source of truth and a pixel-close, responsive HTML/CSS build — giving developers a working reference instead of a static handoff.</p>
+      <div class="media-slot media-slot--wesleyan">images/ai-handoff.jpg</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="big">2</div><div class="small">Design directions explored &amp; tested</div></div>
+      <div class="stat"><div class="big">100%</div><div class="small">System states designed on brand tokens</div></div>
+      <div class="stat"><div class="big">Figma→Code</div><div class="small">Delivered as design and working build</div></div>
+      <div class="stat"><div class="big">6–8 hrs</div><div class="small">Downtime turned into a marketing moment</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <span class="contact__hi">SAY HI!</span>
+    <h2>Want to work with me?</h2>
+    <p>Feel free to reach out for collaborations or just a friendly hello.</p>
+    <div class="contact__links">
+      <a class="btn btn--solid" href="mailto:hsunghardesign@gmail.com">HSUNGHARDESIGN@GMAIL.COM</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a class="footer__logo" href="index.html">HS<span>.</span></a>
+    <nav class="footer__links">
+      <a href="index.html">Home</a>
+      <a href="work-ai-platform.html">AI Platform</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="footer__social">
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>
+    </div>
+    <p class="footer__copy">© 2026 Hamza Sunghar — Designer Portfolio.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
