@@ -29,9 +29,18 @@ body {
   color: var(--ink);
   line-height: 1.7;
   font-size: 17px;
-  background: linear-gradient(160deg, #041712 0%, #0a2d25 38%, #0e3a2f 62%, #062018 100%);
-  background-attachment: fixed;
+  background: #041712; /* solid fallback */
   -webkit-font-smoothing: antialiased;
+}
+/* fixed gradient layer — replaces background-attachment: fixed, which
+   Chrome fails to paint when any element on the page uses backdrop-filter */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(160deg, #041712 0%, #0a2d25 38%, #0e3a2f 62%, #062018 100%);
+  pointer-events: none;
 }
 
 ::selection { background: var(--sand); color: #06231d; }
@@ -187,6 +196,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .sec-sub { color: var(--ink-soft); max-width: 56ch; }
+.sec-sub--wide { max-width: none; white-space: nowrap; }
+@media (max-width: 900px) { .sec-sub--wide { white-space: normal; } }
 .center { text-align: center; }
 .center .sec-sub { margin: 0 auto; }
 
