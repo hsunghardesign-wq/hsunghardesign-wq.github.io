@@ -18,7 +18,7 @@
       <div class="nav-links">
         <a href="index.html#work">work</a>
         <a href="index.html#about">about</a>
-        <a href="https://dochub.com/m/shared-document/hamza-sunghar/qA8ldYxVE3LyBvJR6MJrpP/cv-2025-10-pdf?dt=48s48YyhCrawFHSzD5S-" target="_blank" rel="noopener" class="hide-mobile">resume</a>
+        <a href="Hamza-Sunghar-CV.pdf" target="_blank" rel="noopener" class="hide-mobile">resume</a>
         <a href="mailto:hsunghardesign@gmail.com" class="nav-cta">get in touch</a>
       </div>
     </div>
@@ -524,6 +524,23 @@
       el.style.setProperty('--stagger', (sibs.indexOf(el) % 4) * 0.12 + 's');
       io.observe(el);
     });
+  
+    // case hero blurs out progressively as it scrolls off-screen
+    const heroEl = document.querySelector('.cs-hero .wrap');
+    if (heroEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let hTick = false;
+      const heroBlur = () => {
+        const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.85)));
+        heroEl.style.filter = 'blur(' + (p * 18).toFixed(1) + 'px)';
+        heroEl.style.opacity = (1 - p * 0.92).toFixed(2);
+        heroEl.style.transform = 'translateY(' + (p * -34).toFixed(1) + 'px)';
+        hTick = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!hTick) { requestAnimationFrame(heroBlur); hTick = true; }
+      }, { passive: true });
+      heroBlur();
+    }
   </script>
 </body>
 </html>
