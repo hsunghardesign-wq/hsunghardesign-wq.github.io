@@ -276,6 +276,212 @@
   <section class="cs-section">
     <div class="wrap inner">
       <div class="side reveal">
+        <p class="label">RAG Readiness</p>
+        <h2>Self-contained, or silently misleading</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>A dedicated check sits within the <strong>Clear</strong> and <strong>Relevant</strong> dimensions: the <strong>RAG self-containedness assessment</strong>. Corporate documents — policies, governance frameworks, procedural guides — lean heavily on cross-references and hyperlinks. Fine for a human navigating a document library; a real risk for a RAG system, which retrieves a chunk in isolation. The cross-referenced content simply isn't there, and the AI can produce incomplete or misleading answers without ever knowing it.</p>
+        <p>Every document is assessed on four explicit checks:</p>
+        <ul>
+          <li><strong>Cross-reference density.</strong> How often does the document defer to external documents, sections or systems for essential information? "See also", "refer to", "as defined in", "per policy X" — counted or estimated, and flagged when high.</li>
+          <li><strong>Definition dependency.</strong> Are key terms, thresholds, roles or rules defined only elsewhere? If this document partially answers a question, will the AI be unable to complete the answer because the definition lives in another file?</li>
+          <li><strong>Procedural completeness.</strong> For any process described, are the steps complete here — or do critical steps redirect to another document entirely?</li>
+          <li><strong>Link-rot risk.</strong> Live URLs and references to documents that may move, be renamed, or disappear. Static references are more durable than links, but both fail if the target isn't also in the RAG system.</li>
+        </ul>
+        <p>Findings feed directly into scoring — a graduated penalty ladder rather than a binary pass/fail:</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Finding</th><th>Impact on score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Largely self-contained; only optional supplementary references</td><td class="win">No penalty</td></tr>
+              <tr><td>Cross-references for context, but enough inline information to stay useful</td><td>Minor — −0.5 on the affected dimension</td></tr>
+              <tr><td>Critical information routinely deferred with no inline summary</td><td>Significant — −1 to −2 on Clear and/or Relevant</td></tr>
+              <tr><td>Essentially an index pointing at other documents, no standalone content</td><td>Clear and Relevant scored 1–2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">// every flagged issue ships with a specific mitigation in the recommendations — never a bare penalty</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Metadata Model</p>
+        <h2>Two homes for metadata</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>A key insight from the knowledge-management workstream: <strong>not all metadata belongs inside the document</strong>. A central <strong>content register</strong> captures and manages most fields — so the evaluation deliberately distinguishes what lives where, and never penalises a document for register-managed fields.</p>
+        <div class="kqs">
+          <div class="kqs-card">
+            <p class="kqs-num">category_a — content register</p>
+            <h3>Managed centrally, not in the document</h3>
+            <ul>
+              <li>Title, link, description / abstract</li>
+              <li>Business unit, region, country, site</li>
+              <li>Tags / keywords, language, audience</li>
+              <li>File format and content source</li>
+              <li>Access control, confidentiality level, regulatory tags</li>
+              <li>Linked workflows, referenced documents, curation cadence</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">category_b — document-embedded</p>
+            <h3>Must travel with the content</h3>
+            <ul>
+              <li><strong>Author</strong> — who wrote it</li>
+              <li><strong>Owner</strong> — the accountable business owner</li>
+              <li><strong>Version</strong> — current version number</li>
+              <li><strong>Creation date</strong> — when it was first created</li>
+              <li><strong>Modification / last-reviewed date</strong> — when it was last updated</li>
+            </ul>
+          </div>
+        </div>
+        <p>Why the split matters: when the RAG system retrieves a chunk, the register isn't there to vouch for it. The five Category B fields are the <strong>provenance and trust signals that travel with the content at inference time</strong> — so they must be visible in the document itself (header, footer, cover page or metadata table), and they gate the <em>Accurate</em> and <em>Time-bound</em> scores:</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Category B fields present</th><th>Impact on score</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>All five, clearly visible</td><td class="win">No penalty</td></tr>
+              <tr><td>3–4 present</td><td>Minor gap — −0.5, missing fields noted</td></tr>
+              <tr><td>1–2 present</td><td>Significant gap — −1, flagged as High recommendation</td></tr>
+              <tr><td>None present</td><td>Major issue — −1 to −2, flagged as Critical</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Every evaluation output includes a provenance table, so owners see at a glance which trust signals their document carries:</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Field</th><th>Present in document?</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Author</td><td class="win">Yes</td><td>Found in footer</td></tr>
+              <tr><td>Owner</td><td>Partial</td><td>Team named, no accountable individual</td></tr>
+              <tr><td>Version</td><td class="win">Yes</td><td>v2.3 on cover page</td></tr>
+              <tr><td>Creation date</td><td>No</td><td>Not visible</td></tr>
+              <tr><td>Last reviewed / modified</td><td class="win">Yes</td><td>Metadata table, reviewed quarterly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">// example output — each document receives its own provenance table with per-field notes</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Scoring Model</p>
+        <h2>From judgement to a number teams can act on</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Each dimension is scored on a defined <strong>0–5 scale</strong> — 5 Excellent (fully meets best practice), 4 Good (minor gaps), 3 Adequate (usable but inconsistent), 2 Weak, 1 Poor, 0 N/A (not reviewable from the supplied content) — then normalised to <strong>0.00–1.00</strong> (raw ÷ 5, two decimals). N/A dimensions are excluded and their weight redistributed proportionally, with the exclusion stated openly — <em>never guessed</em>.</p>
+        <p>The overall score is a weighted sum using the official KQS weights, deliberately weighted towards the two dimensions that most affect answer quality:</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Dimension</th><th>Weight</th><th>Rationale</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Clear</td><td class="win">30%</td><td>Parseability decides what the LLM can extract from a chunk</td></tr>
+              <tr><td>Accurate</td><td class="win">30%</td><td>Wrong content confidently retrieved is the worst failure mode</td></tr>
+              <tr><td>Relevant</td><td>15%</td><td>Content must answer real user questions, not describe abstractly</td></tr>
+              <tr><td>Time-bound</td><td>15%</td><td>Provenance and recency signals gate user trust</td></tr>
+              <tr><td>Retrievable</td><td>10%</td><td>Partly system-managed via the content register</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The weighted result maps to a plain-language readiness verdict, with <strong>0.80 as the effective "RAG-ready" threshold</strong>:</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Overall KQS</th><th>Readiness verdict</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0.90 – 1.00</td><td class="win">Excellent — AI-ready; only minor or cosmetic edits</td></tr>
+              <tr><td>0.80 – 0.89</td><td class="win">Good — RAG-ready; improvements nice-to-have, not blocking</td></tr>
+              <tr><td>0.60 – 0.79</td><td>Fair — usable with caution; improve before heavy reliance</td></tr>
+              <tr><td>0.40 – 0.59</td><td>Weak — not suitable as a primary RAG source yet</td></tr>
+              <tr><td>0.00 – 0.39</td><td>Poor — not suitable for RAG in current form</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Transparency was a design requirement, not a nicety: every score ships with its derivation in plain business language — <em>"the document defers critical role definitions to an external HR policy with no inline summary, so Clear = 3/5 → 0.60, down from 4 due to cross-reference dependency"</em> — so a non-technical owner understands exactly why, and exactly what to change.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Mitigations</p>
+        <h2>Never a penalty without a fix</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Every cross-reference issue the evaluation flags is paired with one of <strong>five named mitigation strategies</strong>, matched to the severity and type of problem — each with copy-ready example edits the author can adapt directly:</p>
+        <div class="kqs">
+          <div class="kqs-card">
+            <p class="kqs-num">mitigation_01</p>
+            <h3>Inline summaries for critical dependencies</h3>
+            <ul>
+              <li>When a key term, rule or threshold is defined only in another document</li>
+              <li>Add a brief inline definition where the term is first used — "In brief: purchases under €5,000 may be approved by a line manager…" — so a lone chunk still answers usefully</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">mitigation_02</p>
+            <h3>Embed context in every major section</h3>
+            <ul>
+              <li>When sections depend on context introduced elsewhere</li>
+              <li>Open each major section with a short "Context" or "Scope" paragraph restating key assumptions — RAG retrieves one section at a time</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">mitigation_03</p>
+            <h3>Replace or annotate dead-end references</h3>
+            <ul>
+              <li>When the document says "see document X" with nothing inline</li>
+              <li>Embed the key rule alongside the reference — "Key rule: customer data must be deleted within 90 days of contract end…" — partial answers beat none</li>
+            </ul>
+          </div>
+          <div class="kqs-card">
+            <p class="kqs-num">mitigation_04</p>
+            <h3>Flag document clusters</h3>
+            <ul>
+              <li>When a document is one of several tightly interlinked files</li>
+              <li>List companion documents in the preamble and the register's referenced_documents field, so curators ingest the full cluster together</li>
+            </ul>
+          </div>
+          <div class="kqs-card kqs-card--wide">
+            <p class="kqs-num">mitigation_05</p>
+            <h3>Restructure hub-and-index documents</h3>
+            <ul>
+              <li>When a document is essentially an index with no standalone content</li>
+              <li>Merge it with its most-referenced companions, rewrite essential content inline, or explicitly mark it "not suitable as a standalone RAG source — ingest the companion documents instead"</li>
+              <li>Prevents the AI being asked to answer from a document that was never designed to contain answers</li>
+            </ul>
+          </div>
+        </div>
+        <p>The evaluation itself lands as a structured, human-friendly report: a 3–5 bullet overview of strengths and RAG risks, the normalised score table against the 0.80 target, the provenance metadata check, an always-shown self-containedness flag (density and risk rated low / medium / high), dimension-by-dimension reasoning, and recommendations grouped <strong>Critical / High / Medium / Low</strong> — each with the issue, why it matters for RAG, what to do, example edits, and the expected KQS impact (e.g. <em>+0.10 Time-bound, +0.03 Overall</em>).</p>
+        <div class="stats">
+          <div class="stat"><b>5</b><span>scored dimensions, weighted 10 / 30 / 15 / 30 / 15</span></div>
+          <div class="stat"><b>0.80</b><span>normalised threshold for "RAG-ready"</span></div>
+          <div class="stat"><b>5</b><span>named mitigation strategies, each with copy-ready example edits</span></div>
+          <div class="stat"><b>4</b><span>priority tiers — every issue paired with a concrete fix</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
         <p class="label">Collaboration</p>
         <h2>Shared, invited, notified</h2>
       </div>
