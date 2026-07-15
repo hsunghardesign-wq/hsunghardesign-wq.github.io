@@ -56,6 +56,110 @@
   <section class="cs-section">
     <div class="wrap inner">
       <div class="side reveal">
+        <p class="label">Personas</p>
+        <h2>Owners, consumers, governors</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>The archetypes from the AI Foundry research programme carried directly into the Knowledge Hub — reframed around what people do with knowledge: those who own it, those who consume it, and those accountable for it.</p>
+        <div class="personas">
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">O</div>
+              <div><h3>The Knowledge Owner</h3><p>domain practitioner · owns the source documents · team lead</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Turn the team's SharePoint or Confluence into a working assistant — and keep it healthy without babysitting it.</dd>
+              <dt>Frustrations</dt><dd>Stale documents silently degrade answers; no visibility of what's failing or why.</dd>
+              <dt>Design response</dt><dd>Quality score against a benchmark, per-asset fault flags, and one-click re-evaluate / re-upload to close the loop.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">C</div>
+              <div><h3>The Team Consumer</h3><p>newcomer to the platform · just wants trustworthy answers</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Ask a question and trust the answer — without knowing how knowledge bases work.</dd>
+              <dt>Frustrations</dt><dd>Can't tell which assistant to trust, or whether its sources are current.</dd>
+              <dt>Design response</dt><dd>Scoped assistants per knowledge base with a clear "Ready" state — a benchmark-backed signal that answers can be trusted.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">G</div>
+              <div><h3>The Governor</h3><p>platform admin · accountable for access and data flows</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Know exactly who can ask each assistant questions, and where its data comes from.</dd>
+              <dt>Frustrations</dt><dd>Sharing bolted on after launch; access decisions made informally and invisibly.</dd>
+              <dt>Design response</dt><dd>Access and governance as step 3 of creation itself, with invitations and notifications keeping every change visible.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">P</div>
+              <div><h3>The Power User</h3><p>high AI maturity · runs several assistants across teams</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Spin up an assistant per body of knowledge — HR bot, spec bot, compliance bot — and share them.</dd>
+              <dt>Frustrations</dt><dd>Multi-source setups with separate authentication become fragile and opaque.</dd>
+              <dt>Design response</dt><dd>Multiple connectors per knowledge base, each managing its own authentication, behind one guided flow.</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">A/B Testing</p>
+        <h2>Patterns that earned their place</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Key interaction patterns were tested as explicit alternatives with users before committing — the shipped design is the variant that won.</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Experiment</th><th>Variant A</th><th>Variant B</th><th>Outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Creation flow</td>
+                <td>Single configuration form</td>
+                <td>Four-step wizard with in-context assistant guide</td>
+                <td class="win">B — non-technical owners completed setup unaided</td>
+              </tr>
+              <tr>
+                <td>Quality visibility</td>
+                <td>Health hidden in admin settings</td>
+                <td>Score vs. benchmark surfaced on the assistant itself</td>
+                <td class="win">B — turned filing into an accountability loop</td>
+              </tr>
+              <tr>
+                <td>Sharing model</td>
+                <td>Share after creation, from settings</td>
+                <td>Access decided in-flow as step 3</td>
+                <td class="win">B — governance became part of the definition, not an afterthought</td>
+              </tr>
+              <tr>
+                <td>Collaboration loop</td>
+                <td>Email-only updates</td>
+                <td>In-product invitations &amp; notification centre</td>
+                <td class="win">B — ownership stopped being a bottleneck</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">// design comparisons validated in moderated testing · quantitative split-testing planned post-release</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
         <p class="label">Creation flow</p>
         <h2>A wizard anyone can finish</h2>
       </div>

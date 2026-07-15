@@ -97,6 +97,110 @@
   <section class="cs-section">
     <div class="wrap inner">
       <div class="side reveal">
+        <p class="label">Personas</p>
+        <h2>Four archetypes, four journeys</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>The synthesis crystallised into four personas — each mapped as a step-by-step journey to first value, and each answered by specific design decisions.</p>
+        <div class="personas">
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">N</div>
+              <div><h3>The Newcomer</h3><p>sales associate · low AI maturity · first week on the hub</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Reach a first successful outcome fast, without learning the AI landscape first.</dd>
+              <dt>Frustrations</dt><dd>Doesn't know where to start; agent names and distinctions mean nothing to them.</dd>
+              <dt>Design response</dt><dd>Apple-style visual onboarding, a low-density home, and the "Recommended for you" strip that suggests the first action.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">D</div>
+              <div><h3>The Domain Practitioner</h3><p>marketing &amp; content roles · medium maturity · output-driven</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Produce on-brand, usable work — decks, copy, campaigns — straight from the hub.</dd>
+              <dt>Frustrations</dt><dd>Generated outputs need reworking for brand and legal before anyone can use them.</dd>
+              <dt>Design response</dt><dd>Template and brand fidelity built in — approved logos, colours and formats with sign-off upstream.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">P</div>
+              <div><h3>The Power User</h3><p>ops &amp; technical roles · high maturity · builds for their team</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Create, chain and share capabilities — turning personal workflows into team assets.</dd>
+              <dt>Frustrations</dt><dd>Capability scattered across disconnected agents; nothing they build is shareable.</dd>
+              <dt>Design response</dt><dd>Create-and-share team-scoped skills (the programme's most corroborated ask) and a side-nav library for skills and prompts.</dd>
+            </dl>
+          </div>
+          <div class="persona">
+            <div class="persona-head">
+              <div class="persona-avatar">G</div>
+              <div><h3>The Governor</h3><p>platform &amp; compliance owners · accountable for trust and ROI</p></div>
+            </div>
+            <dl>
+              <dt>Goals</dt><dd>Prove value under scrutiny and keep data flows controlled and explainable.</dd>
+              <dt>Frustrations</dt><dd>Opaque data access; no evidence of what the platform saves or produces.</dd>
+              <dt>Design response</dt><dd>Opt-in connectors with per-app authorisation, confidence scoring on answers, and time-saved metrics in the feedback loop.</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">A/B Testing</p>
+        <h2>Directions tested head-to-head</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Competing design directions were framed as explicit comparisons and put in front of testers during the moderated sessions — so the winning pattern earned its place with evidence, not opinion.</p>
+        <div class="table-scroll">
+          <table class="ab-table">
+            <thead>
+              <tr><th>Experiment</th><th>Variant A</th><th>Variant B</th><th>Outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Entry model</td>
+                <td>Tool-picker — users choose the right agent</td>
+                <td>Invisible routing — one input, hub routes the request</td>
+                <td class="win">B — agent confusion was a recurring theme across sessions</td>
+              </tr>
+              <tr>
+                <td>Homepage</td>
+                <td>Dense dashboard of every capability</td>
+                <td>"Recommended for you" strip, chrome stripped out</td>
+                <td class="win">B — low density for newcomers, depth preserved for power users</td>
+              </tr>
+              <tr>
+                <td>Onboarding</td>
+                <td>Documentation and help-centre links</td>
+                <td>Apple-style visual onboarding to first outcome</td>
+                <td class="win">B — newcomers reached first value unaided</td>
+              </tr>
+              <tr>
+                <td>Answer trust</td>
+                <td>Plain responses</td>
+                <td>Confidence &amp; accuracy indicators on responses</td>
+                <td class="win">B — directly answered the trust-and-ROI theme</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">// concept comparisons validated in 15 moderated sessions · quantitative split-testing planned post-release</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
         <p class="label">Design</p>
         <h2>Evidence-led interface decisions</h2>
       </div>
