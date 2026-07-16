@@ -102,6 +102,28 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-cta:hover { background: rgba(255, 255, 255, 0.14); border-color: var(--accent); }
 
+/* ---------- Burger (mobile only) ---------- */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 130;
+}
+.nav-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.3s ease;
+}
+.nav-burger.open span:first-child { transform: translateY(4.5px) rotate(45deg); }
+.nav-burger.open span:last-child { transform: translateY(-4.5px) rotate(-45deg); }
+
 /* ---------- Hero (homepage) ---------- */
 .hero {
   min-height: 100vh;
@@ -756,7 +778,36 @@ a { color: inherit; text-decoration: none; }
   .cs-section .inner { grid-template-columns: 1fr; gap: 26px; }
   .cs-section .side { position: static; }
   .gallery.two { grid-template-columns: 1fr; }
+  .contact { padding: 100px 0 80px; }
+}
+
+/* ---------- Mobile nav: burger + full-screen glass panel ---------- */
+@media (max-width: 720px) {
+  .nav-burger { display: flex; }
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    font-size: 1.2rem;
+    /* glass panel — same material as the tiles and nav bar */
+    background: rgba(4, 23, 18, 0.55);
+    backdrop-filter: blur(28px) saturate(1.6);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .nav-links.open { opacity: 1; pointer-events: auto; }
+  .nav-links .hide-mobile { display: block; }  /* Resume joins the panel */
+  .nav-links .nav-cta { padding: 14px 34px; }
+}
+@media (min-width: 721px) and (max-width: 900px) {
   .nav-links { gap: 18px; font-size: 0.85rem; }
   .nav-links .hide-mobile { display: none; }
-  .contact { padding: 100px 0 80px; }
 }

@@ -14,13 +14,14 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">hamza sunghar<span>.</span></a>
+      <a href="index.html" class="nav-logo">Hamza Sunghar<span>.</span></a>
       <div class="nav-links">
-        <a href="index.html#work">work</a>
-        <a href="index.html#about">about</a>
-        <a href="Hamza-Sunghar-CV.pdf" target="_blank" rel="noopener" class="hide-mobile">resume</a>
-        <a href="mailto:hsunghardesign@gmail.com" class="nav-cta">get in touch</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="Hamza-Sunghar-CV.pdf" target="_blank" rel="noopener" class="hide-mobile">Resume</a>
+        <a href="mailto:hsunghardesign@gmail.com" class="nav-cta">Get in Touch</a>
       </div>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </nav>
 
@@ -281,6 +282,24 @@
         if (!hTick) { requestAnimationFrame(heroBlur); hTick = true; }
       }, { passive: true });
       heroBlur();
+    }
+  
+    // mobile burger menu
+    const navBurger = document.querySelector('.nav-burger');
+    const navPanel = document.querySelector('.nav-links');
+    if (navBurger && navPanel) {
+      navBurger.addEventListener('click', () => {
+        const open = navPanel.classList.toggle('open');
+        navBurger.classList.toggle('open', open);
+        navBurger.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        navPanel.classList.remove('open');
+        navBurger.classList.remove('open');
+        navBurger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }));
     }
   </script>
 </body>
