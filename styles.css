@@ -811,3 +811,194 @@ a { color: inherit; text-decoration: none; }
   .nav-links { gap: 18px; font-size: 0.85rem; }
   .nav-links .hide-mobile { display: none; }
 }
+
+/* ==========================================================
+   Motion layer — reference: originkit.dev (animated component
+   library). Effects are re-implemented here in plain CSS/JS
+   and tuned for the editorial dark-green system.
+   JS-driven pieces live in motion.js; everything below that
+   is CSS-only also reaches the encrypted homepage.
+   ========================================================== */
+
+/* ---------- Ambient aurora (CSS-only, drifts behind everything) ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 32% at 22% 28%, rgba(143, 214, 181, 0.13), transparent 70%),
+    radial-gradient(30% 28% at 78% 70%, rgba(230, 222, 142, 0.07), transparent 70%),
+    radial-gradient(26% 24% at 60% 18%, rgba(103, 232, 249, 0.06), transparent 70%);
+  animation: aurora-drift 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes aurora-drift {
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1); }
+  50%  { transform: translate3d(2%, 3%, 0) scale(1.06); }
+  100% { transform: translate3d(4%, -3%, 0) scale(1.02); }
+}
+
+/* ---------- Shiny kicker (OriginKit "Shiny Pill": endless sheen sweep) ---------- */
+.kicker, .sec-kicker {
+  background: linear-gradient(110deg, var(--sand) 0%, var(--sand) 42%, #fff 50%, var(--sand) 58%, var(--sand) 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-sheen 5.5s linear infinite;
+}
+@keyframes text-sheen {
+  0%   { background-position: 110% 0; }
+  100% { background-position: -110% 0; }
+}
+
+/* ---------- Button sheen sweep + magnetic pull ---------- */
+.btn, .btn-ghost, .nav-cta { position: relative; overflow: hidden; }
+.btn::after, .btn-ghost::after, .nav-cta::after {
+  content: "";
+  position: absolute;
+  top: -40%; bottom: -40%;
+  left: -30%;
+  width: 34%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.28) 50%, transparent 100%);
+  transform: skewX(-20deg) translateX(-140%);
+  animation: btn-sheen 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+.btn::after { background: linear-gradient(100deg, transparent 0%, rgba(143, 214, 181, 0.55) 50%, transparent 100%); }
+.btn-ghost::after { animation-delay: 1.4s; }
+@keyframes btn-sheen {
+  0%, 62% { transform: skewX(-20deg) translateX(-140%); }
+  100%    { transform: skewX(-20deg) translateX(520%); }
+}
+.btn.mag, .btn-ghost.mag, .nav-cta.mag { transition: transform 0.14s ease-out, box-shadow 0.25s, background 0.25s, border-color 0.25s; }
+.btn, .btn-ghost, .nav-cta { transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s, background 0.25s, border-color 0.25s; }
+
+/* ---------- Scroll hint: pulse travelling down the line ---------- */
+.scroll-hint::after {
+  transform-origin: top;
+  animation: hint-drop 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes hint-drop {
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(38px); opacity: 0; }
+}
+
+/* ---------- Project tiles: icon springs on hover ---------- */
+.p-tile .icon-box { transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s; }
+.project:hover .p-tile .icon-box {
+  transform: scale(1.12) rotate(-5deg);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+}
+.p-tags span { transition: border-color 0.25s, color 0.25s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.project:hover .p-tags span { border-color: rgba(143, 214, 181, 0.45); color: var(--ink); }
+
+/* ---------- Word-level smoky reveal (OriginKit "Smoky Text") ----------
+   motion.js splits headings inside .reveal into .w spans; each word
+   diffuses in with its own delay after the parent starts. */
+.reveal .w {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(0.35em);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--stagger, 0s) + var(--wi, 0) * 55ms);
+}
+.reveal.visible .w { opacity: 1; filter: blur(0); transform: none; }
+
+/* ---------- Scramble decode (OriginKit "Scramble Text") ---------- */
+.scrambling { font-variant-ligatures: none; }
+
+/* ---------- Hero grid canvas (OriginKit "Blinking Squares") ---------- */
+.cs-hero, .hero { position: relative; }
+.cs-hero > .wrap, .hero > .wrap { position: relative; z-index: 1; }
+.motion-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 30%, #000 20%, transparent 78%);
+          mask-image: radial-gradient(ellipse 70% 80% at 50% 30%, #000 20%, transparent 78%);
+}
+
+/* ---------- Pixel reveal overlay (OriginKit "Pixel Reveal") ---------- */
+.px-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--px-radius, 0);
+}
+.px-wrap > img, .px-wrap > video { border-radius: 0 !important; }
+.px-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.px-wrap.px-done .px-cover { opacity: 0; }
+
+/* ---------- Cursor spotlight on cards (OriginKit "Spotlight Text", applied to surfaces) ---------- */
+.spot { position: relative; overflow: hidden; }
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(143, 214, 181, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.spot:hover::before { opacity: 1; }
+.spot > * { position: relative; z-index: 1; }
+
+/* ---------- Direction-aware link hover (OriginKit "Direction Hover") ---------- */
+.dh { position: relative; display: inline-block; overflow: hidden; vertical-align: bottom; }
+.dh-a, .dh-b { display: block; transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1); }
+.dh-b { position: absolute; inset: 0; color: var(--accent); transform: translateY(100%); }
+.nav-links a:has(.dh):hover, .footer-links a:has(.dh):hover { color: inherit; }
+
+/* ---------- Press tilt on covers (OriginKit "Blur Carousel" press-tilt) ---------- */
+.tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s;
+  will-change: transform;
+}
+.tilt.is-tilting { transition: transform 0.12s ease-out, box-shadow 0.6s; }
+
+/* ---------- Dynamic weight (OriginKit "Dynamic Weight" — variable font) ---------- */
+.dw { display: inline; transition: font-variation-settings 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+[data-weight-live] .dw { transition: font-variation-settings 0.08s linear; }
+
+/* ---------- Image hover lift ---------- */
+.gallery img, .full-img img { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s; }
+.gallery figure:hover img, .full-img:hover img { transform: translateY(-4px) scale(1.012); box-shadow: 0 34px 70px rgba(0, 0, 0, 0.5); }
+
+/* ---------- Focus ring ---------- */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ---------- Reduced motion: everything settles instantly ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body::after, .kicker, .sec-kicker, .btn::after, .btn-ghost::after, .nav-cta::after, .scroll-hint::after { animation: none; }
+  .kicker, .sec-kicker { background: none; color: var(--sand); -webkit-text-fill-color: initial; }
+  .reveal .w { transition: none; opacity: 1; filter: none; transform: none; }
+  .motion-grid, .px-cover { display: none; }
+  .tilt, .dh-a, .dh-b, .dw, .btn, .btn-ghost, .nav-cta { transition: none; }
+  .spot::before { display: none; }
+}

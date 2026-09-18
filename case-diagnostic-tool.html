@@ -7,7 +7,7 @@
   <meta name="description" content="Case study: redesigning Dyson's Help Me Choose diagnostic tool to reduce cognitive load and drop-off.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -106,50 +106,6 @@
     </div>
   </footer>
 
-  <script>
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting));
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach((el, i) => {
-      const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.classList && c.classList.contains('reveal')) : [el];
-      el.style.setProperty('--stagger', (sibs.indexOf(el) % 4) * 0.12 + 's');
-      io.observe(el);
-    });
-  
-    // case hero blurs out progressively as it scrolls off-screen
-    const heroEl = document.querySelector('.cs-hero .wrap');
-    if (heroEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let hTick = false;
-      const heroBlur = () => {
-        const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.85)));
-        heroEl.style.filter = 'blur(' + (p * 18).toFixed(1) + 'px)';
-        heroEl.style.opacity = (1 - p * 0.92).toFixed(2);
-        heroEl.style.transform = 'translateY(' + (p * -34).toFixed(1) + 'px)';
-        hTick = false;
-      };
-      window.addEventListener('scroll', () => {
-        if (!hTick) { requestAnimationFrame(heroBlur); hTick = true; }
-      }, { passive: true });
-      heroBlur();
-    }
-  
-    // mobile burger menu
-    const navBurger = document.querySelector('.nav-burger');
-    const navPanel = document.querySelector('.nav-links');
-    if (navBurger && navPanel) {
-      navBurger.addEventListener('click', () => {
-        const open = navPanel.classList.toggle('open');
-        navBurger.classList.toggle('open', open);
-        navBurger.setAttribute('aria-expanded', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-      });
-      navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        navPanel.classList.remove('open');
-        navBurger.classList.remove('open');
-        navBurger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }));
-    }
-  </script>
+  <script src="motion.js" defer></script>
 </body>
 </html>

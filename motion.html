@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion Lab — Hamza Sunghar</title>
+  <meta name="description" content="Reference page for the portfolio's motion layer: every animation, where it comes from, and how to apply it.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .lab-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm);
+      padding: 28px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px;
+    }
+    .lab-card--wide { grid-column: 1 / -1; }
+    .lab-demo { display: flex; align-items: center; justify-content: center; min-height: 90px; text-align: center; }
+    .lab-demo h3 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+    .lab-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); letter-spacing: 0.04em; line-height: 1.8; }
+    .lab-meta b { color: var(--sand); font-weight: 500; }
+    .lab-meta code { color: var(--accent); }
+    .lab-links { display: flex; gap: 26px; font-size: 1rem; color: var(--ink-soft); }
+    .lab-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .lab-img { width: 100%; max-width: 520px; }
+    .lab-img img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+    @media (max-width: 900px) { .lab-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Hamza Sunghar<span>.</span></a>
+      <div class="nav-links">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="Hamza-Sunghar-CV.pdf" target="_blank" rel="noopener" class="hide-mobile">Resume</a>
+        <a href="mailto:hsunghardesign@gmail.com" class="nav-cta">Get in Touch</a>
+      </div>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="cs-hero">
+    <div class="wrap">
+      <p class="crumb reveal"><a href="index.html">← home</a> / motion_lab</p>
+      <h1 class="reveal">Motion Lab — every animation in one place</h1>
+      <dl class="cs-meta reveal">
+        <div><dt>Reference</dt><dd>originkit.dev</dd></div>
+        <div><dt>Stack</dt><dd>Vanilla CSS + JS</dd></div>
+        <div><dt>Dependencies</dt><dd>None</dd></div>
+        <div><dt>Reduced motion</dt><dd>Respected everywhere</dd></div>
+      </dl>
+      <p class="kicker">This hero: Scramble Text on the title · Blinking Squares canvas behind it · Shiny Pill sheen on this line · blur-out on scroll</p>
+    </div>
+  </header>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Text</p>
+        <h2>Type that moves with intent</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p>Each effect below is a from-scratch re-implementation of an OriginKit component, stripped to what fits an editorial portfolio. Hover, scroll and resize to exercise them. Anything can be switched on with <em>data-motion="name"</em> or off for a whole subtree with <em>data-motion="off"</em>.</p>
+        <div class="lab-grid">
+          <div class="lab-card lab-card--wide">
+            <div class="lab-demo"><h2 class="reveal">Words diffuse in one at a time, like smoke settling — and blur back out when they scroll away.</h2></div>
+            <p class="lab-meta"><b>Smoky Text</b> → word-level reveal · auto on <code>h2</code> inside <code>.reveal</code> · opt in: <code>data-motion="words"</code> on any <code>.reveal</code></p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-demo"><h3 data-motion="weight">Weight follows the cursor</h3></div>
+            <p class="lab-meta"><b>Dynamic Weight</b> → per-letter variable-font weight by cursor distance · auto on <code>.next-project h2</code> · opt in: <code>data-motion="weight"</code></p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-demo"><h3 data-motion="scramble">Decoded on load</h3></div>
+            <p class="lab-meta"><b>Scramble Text</b> → cinematic glyph decode, left to right with jitter · auto on <code>.cs-hero h1</code> · opt in: <code>data-motion="scramble"</code></p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-demo"><nav class="lab-links footer-links"><a href="#">Enter from</a><a href="#">above or</a><a href="#">below</a></nav></div>
+            <p class="lab-meta"><b>Direction Hover</b> → accent copy slides in from the edge the cursor enters, leaves through the edge it exits · auto on nav + footer links · opt in: <code>data-motion="dh"</code></p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-demo"><p class="kicker" style="margin:0">Endless sheen sweep</p></div>
+            <p class="lab-meta"><b>Shiny Pill</b> → CSS-only text sheen · auto on <code>.kicker</code>, <code>.sec-kicker</code> · works on the encrypted homepage too</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Images</p>
+        <h2>Reveals that earn the wait</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <div class="lab-grid">
+          <div class="lab-card">
+            <div class="lab-demo"><figure class="lab-img cs-cover"><img src="images/ds-hero.png" alt="Design system hero" loading="lazy"></figure></div>
+            <p class="lab-meta"><b>Pixel Reveal</b> + <b>press tilt</b> → grid of squares dissolves with a glowing ragged edge, then the cover tilts under the cursor · auto on <code>.cs-cover</code>, <code>.full-img</code>, <code>.gallery img</code> · opt in: <code>data-motion="pixel tilt"</code></p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-demo"><div class="gallery two lab-img" style="margin:0"><figure><img src="images/kb-cover.png" alt="Knowledge hub cover" loading="lazy"></figure><figure><img src="images/ai-foundry-cover.png" alt="AI Foundry cover" loading="lazy"></figure></div></div>
+            <p class="lab-meta"><b>Pixel Reveal</b> → sweep direction alternates (right, down, left, up) per image so a gallery never reveals in lockstep</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Surfaces</p>
+        <h2>Cards that answer the cursor</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <div class="stats">
+          <div class="stat"><b>250+</b><span>components in the OriginKit library used as reference</span></div>
+          <div class="stat"><b>10</b><span>effects re-implemented here without a single dependency</span></div>
+          <div class="stat"><b>4.6/5</b><span>decimals and suffixes survive the count-up intact</span></div>
+          <div class="stat"><b>1,200</b><span>thousands separators too</span></div>
+        </div>
+        <p class="lab-meta" style="margin-top:14px"><b>Spotlight</b> → cursor-following radial glow · auto on <code>.stat</code>, <code>.persona</code>, <code>.kqs-card</code>, <code>.cs-meta > div</code>, <code>.callout</code> · opt in: <code>data-motion="spot"</code><br><b>Count-up</b> → numbers tick up on first view · auto on <code>.stat b</code> · opt in: <code>data-motion="count"</code></p>
+        <div class="callout"><b>Callouts</b> get the same spotlight. Everything here also works with keyboard focus and on touch, where the cursor effects simply stay quiet.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Buttons</p>
+        <h2>Pull, then let go</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <div class="lab-grid">
+          <div class="lab-card lab-card--wide">
+            <div class="lab-demo lab-cta">
+              <a href="#" class="btn">Primary button</a>
+              <a href="#" class="btn-ghost">Ghost button</a>
+              <a href="#" class="nav-cta">Nav pill</a>
+            </div>
+            <p class="lab-meta"><b>Magnetic</b> → buttons lean toward the cursor and spring back on leave · <b>Sheen</b> → CSS-only light sweep every few seconds · auto on <code>.btn</code>, <code>.btn-ghost</code>, <code>.nav-cta</code> · opt in: <code>data-motion="magnetic"</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="wrap inner">
+      <div class="side reveal">
+        <p class="label">Backdrop</p>
+        <h2>Always on, never loud</h2>
+      </div>
+      <div class="cs-prose reveal">
+        <p><strong>Aurora drift</strong> — three soft radial glows drift behind every page on a 34-second loop (CSS-only, so the homepage has it too).</p>
+        <p><strong>Blinking Squares</strong> — the hero grid twinkles at 30fps, thins out toward the bottom, brightens in a halo around the cursor, and pauses when scrolled away or when the tab is hidden. Canvas resolution is capped at 1.5× so it stays cheap on high-DPI handhelds.</p>
+        <p><strong>Scroll hint</strong> — a pulse travels down the hero's hairline instead of a static gradient.</p>
+        <ul>
+          <li>Opt out per subtree: <em>data-motion="off"</em></li>
+          <li>Reduced-motion users get the final state of everything immediately</li>
+          <li>Touch devices skip the cursor-driven effects and keep the scroll-driven ones</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-project">
+    <p class="label">try_the_weight_morph</p>
+    <a href="case-ai-foundry.html"><h2>Enterprise AI Foundry Chat →</h2></a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 hamza_sunghar // based_in: united_kingdom</span>
+      <div class="footer-links">
+        <a href="https://www.behance.net/HSMDesigner" target="_blank" rel="noopener">behance</a>
+        <a href="https://www.linkedin.com/in/hamza-sunghar/" target="_blank" rel="noopener">linkedin</a>
+        <a href="mailto:hsunghardesign@gmail.com">email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="motion.js" defer></script>
+</body>
+</html>
