@@ -1,0 +1,4 @@
+version: 1
+# Change this to something unique to you, e.g. com.yourname.doc
+bundleID: com.dreamownersclub.app
+iconPath: Resources/AppIcon.png
